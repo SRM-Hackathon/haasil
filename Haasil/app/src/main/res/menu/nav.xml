@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_waste"
+        android:icon="@drawable/trashsel"
+        android:title="@string/title_waste" />
+
+    <item
+        android:id="@+id/navigation_food"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/title_food" />
+
+    <item
+        android:id="@+id/navigation_elec"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/title_elec" />
+
+</menu>
