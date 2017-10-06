@@ -5,7 +5,7 @@ class FoodSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Food
-        fields = ('humidity', 'temperature')
+        fields = ('id', 'stamp', 'humidity', 'temperature', 'heat_index')
 
     def create(self, validated_data):
         """
@@ -19,5 +19,6 @@ class FoodSerializer(serializers.ModelSerializer):
         """
         instance.humidity = validated_data.get('humidity', instance.humidity)
         instance.temperature = validated_data.get('temperature', instance.temperature)
+        instance.heat_index = validated_data.get('heat_index', instance.heat_index)
         instance.save()
         return instance
