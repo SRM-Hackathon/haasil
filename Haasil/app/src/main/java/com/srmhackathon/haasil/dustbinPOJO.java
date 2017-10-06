@@ -5,6 +5,13 @@ package com.srmhackathon.haasil;
  */
 
 public class dustbinPOJO {
+
+    public dustbinPOJO(String dustbinID, String percentage){
+        this.dustbinID = dustbinID;
+        this.percentage = percentage;
+    }
+
+
     public String getDustbinID() {
         return dustbinID;
     }

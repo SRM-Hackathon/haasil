@@ -1,133 +1,94 @@
 package com.srmhackathon.haasil;
 
+
 import android.content.Context;
-import android.content.res.Configuration;
-import android.net.Uri;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.RecyclerView;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ramotion.foldingcell.FoldingCell;
+
+import java.util.HashSet;
 import java.util.List;
 
 /**
- * Created by Ravi on 06-10-2017.
+ * Simple example of ListAdapter for using with Folding Cell
+ * Adapter holds indexes of unfolded elements for correct work with default reusable views behavior
  */
+public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
 
-public class dustbinAdapter extends RecyclerView.Adapter<dustbinAdapter.VH> {
+    private HashSet<Integer> unfoldedIndexes = new HashSet<>();
 
-    List<dustbinPOJO> dustList;
-    public static Context context;
-    static int config;
 
-    public dustbinAdapter(Context context, List<dustbinPOJO> dustList, int config) {
-        this.dustList = dustList;
-        this.context = context;
-        this.config = config;
+    public dustbinAdapter(Context context, List<dustbinPOJO> objects) {
+        super(context, 0, objects);
     }
 
     @Override
-    public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_layout, parent, false);
-        VH holder = new VH(view);
-        return holder;
-    }
+    public View getView(int position, View convertView, ViewGroup parent) {
+        // get item for selected view
+        dustbinPOJO item = getItem(position);
+        // if cell is exists - reuse it, if not - create the new one from resource
+        FoldingCell cell = (FoldingCell) convertView;
+        ViewHolder viewHolder;
+        if (cell == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater vi = LayoutInflater.from(getContext());
+            cell = (FoldingCell) vi.inflate(R.layout.waste_list_item, parent, false);
+            // binding view parts to view holder
+            viewHolder.number = (TextView) cell.findViewById(R.id.number);
+            viewHolder.numberDesc = (TextView) cell.findViewById(R.id.numberDesc);
+            viewHolder.perc = (TextView) cell.findViewById(R.id.percent);
+            viewHolder.img = (ImageView) cell.findViewById(R.id.img);
 
-
-    @Override
-    public void onBindViewHolder(VH holder, int position) {
-        holder.setData(newsList.get(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return newsList.size();
-    }
-
-    public static class VH extends RecyclerView.ViewHolder {
-
-        CardView cardView;
-        TextView title, website, time;
-        WebView image;
-        LikeButton likeButton;
-
-        public VH(View itemView) {
-            super(itemView);
-            cardView = (CardView) itemView.findViewById(R.id.list_item_class_card);
-            title = (TextView) itemView.findViewById(R.id.title);
-            website = (TextView) itemView.findViewById(R.id.website);
-            time = (TextView) itemView.findViewById(R.id.time);
-            image = (WebView) itemView.findViewById(R.id.image);
-            likeButton = (LikeButton) itemView.findViewById(R.id.star_button);
-
+            cell.setTag(viewHolder);
+        } else {
+            // for existing cell set valid valid state(without animation)
+            if (unfoldedIndexes.contains(position)) {
+                cell.unfold(true);
+            } else {
+                cell.fold(true);
+            }
+            viewHolder = (ViewHolder) cell.getTag();
         }
 
-        public void setData(final NewsPOJO data) {
-
-            title.setText(data.getTITLE());
-            website.setText(data.getPUBLISHER());
-            time.setText(data.getTIMESTAMP());
-            if (config == Configuration.ORIENTATION_PORTRAIT)
-                image.loadUrl("https://logo.clearbit.com/" + data.getHOSTNAME() + "?size=100");
-            else
-                image.loadUrl("https://logo.clearbit.com/" + data.getHOSTNAME() + "?size=90");
-
-            if(db.getNews(data))
-                likeButton.setLiked(true);
-            else
-                likeButton.setLiked(false);
-
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                    CustomTabsIntent customTabsIntent = builder.build();
-                    customTabsIntent.launchUrl(context, Uri.parse(data.getURL()));
-                }
-            });
+        // bind data from selected element to view through view holder
+        viewHolder.number.setText(item.getDustbinID());
+        viewHolder.numberDesc.setText(item.getDustbinID());
+        viewHolder.perc.setText(item.getPercentage());
+        viewHolder.img.setImageResource(R.drawable.flash);
 
 
-            image.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                    CustomTabsIntent customTabsIntent = builder.build();
-                    customTabsIntent.launchUrl(context, Uri.parse(data.getURL()));
-                }
-            });
 
-            time.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-                    CustomTabsIntent customTabsIntent = builder.build();
-                    customTabsIntent.launchUrl(context, Uri.parse(data.getURL()));
-                }
-            });
+        return cell;
+    }
 
-            likeButton.setOnLikeListener(new OnLikeListener() {
-                @Override
-                public void liked(LikeButton likeButton) {
-                    Snackbar.make(likeButton.getRootView(),"Added To Liked List",Snackbar.LENGTH_SHORT).show();
-                    db.addContact(data);
-                    if(context instanceof MainActivity)
-                        ((MainActivity)context).refresh();
-                }
+    // simple methods for register cell state changes
+    public void registerToggle(int position) {
+        if (unfoldedIndexes.contains(position))
+            registerFold(position);
+        else
+            registerUnfold(position);
+    }
 
-                @Override
-                public void unLiked(LikeButton likeButton) {
-                    Snackbar.make(likeButton.getRootView(),"Removed from Liked List",Snackbar.LENGTH_SHORT).show();
-                    db.deleteContact(data);
+    public void registerFold(int position) {
+        unfoldedIndexes.remove(position);
+    }
 
-                    if(context instanceof MainActivity)
-                        ((MainActivity)context).refresh();
-                }
-            });
-        }
+    public void registerUnfold(int position) {
+        unfoldedIndexes.add(position);
     }
 
 
+    // View lookup cache
+    private static class ViewHolder {
+        TextView number;
+        TextView numberDesc;
+        TextView perc;
+        ImageView img;
+    }
 }
