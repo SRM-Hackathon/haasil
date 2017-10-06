@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "321900228246-k5q9mfjn8fsc5qt1mdcfngvdt7rbl9v1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.srmhackathon.haasil",
+            "certificate_hash": "ad5616291774f4f1070bab144586cf51fb7e60c9"
+          }
+        },
+        {
           "client_id": "321900228246-cf6p0iepv7n9kj2386mk5bq1k3ulm6o7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
