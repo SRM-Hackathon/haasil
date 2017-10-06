@@ -35,8 +35,12 @@ dependencies {
     compile 'com.google.android.gms:play-services-auth:10.0.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.theartofdev.edmodo:android-image-cropper:2.4.+'
+    compile 'com.r0adkll:slidableactivity:2.0.5'
+    compile 'com.github.chyrta:AndroidOnboarder:0.7'
     testCompile 'junit:junit:4.12'
 }
+
+
 
 
 
