@@ -1,8 +1,12 @@
 package com.srmhackathon.haasil;
 
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
-import android.os.Build;
+import android.content.Intent;
+import android.graphics.drawable.TransitionDrawable;
+import android.support.v7.app.NotificationCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,9 +27,10 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
 
     private HashSet<Integer> unfoldedIndexes = new HashSet<>();
 
-
+    private  Context c;
     public dustbinAdapter(Context context, List<dustbinPOJO> objects) {
         super(context, 0, objects);
+        c=  context;
     }
 
     @Override
@@ -42,6 +47,8 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
             // binding view parts to view holder
             viewHolder.number = (TextView) cell.findViewById(R.id.number);
             viewHolder.numberDesc = (TextView) cell.findViewById(R.id.numberDesc);
+            viewHolder.percDesc = (TextView) cell.findViewById(R.id.percenDesc);
+
             viewHolder.perc = (TextView) cell.findViewById(R.id.percent);
             viewHolder.img = (ImageView) cell.findViewById(R.id.img);
 
@@ -59,12 +66,66 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
         // bind data from selected element to view through view holder
         viewHolder.number.setText(item.getDustbinID());
         viewHolder.numberDesc.setText(item.getDustbinID());
-        viewHolder.perc.setText(item.getPercentage());
-        viewHolder.img.setImageResource(R.drawable.flash);
+        viewHolder.perc.setText(item.getPercentage()+"%");
+        viewHolder.percDesc.setText(item.getPercentage()+"%");
 
+        update(Float.parseFloat(item.getPercentage()), viewHolder);
 
 
         return cell;
+    }
+
+
+    private void update(float progressing, ViewHolder viewHolder) {
+        if (progressing < 15)
+            viewHolder.img.setImageResource(R.drawable.bin1);
+
+        else if (progressing >= 15 && progressing < 35) {
+            viewHolder.img.setImageResource(R.drawable.transition);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+
+        } else if (progressing >= 35 && progressing < 65) {
+            viewHolder.img.setImageResource(R.drawable.trasn);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+
+        } else if (progressing >= 65 && progressing < 85) {
+            viewHolder.img.setImageResource(R.drawable.trasn1);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+            android.support.v4.app.NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(c)
+                            .setSmallIcon(R.drawable.applogo)
+                            .setContentTitle("Smart Waste Management Application")
+                            .setContentText("Your Bin Is Almost 75% Full");
+
+            Intent notificationIntent = new Intent(c, MainActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(c, 0, notificationIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(contentIntent);
+
+            // Add as notification
+            NotificationManager manager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(0, builder.build());
+
+        } else if (progressing >= 85 && progressing <= 100) {
+            viewHolder.img.setImageResource(R.drawable.trasn2);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+            android.support.v4.app.NotificationCompat.Builder builder =
+                    new NotificationCompat.Builder(c)
+                            .setSmallIcon(R.drawable.applogo)
+                            .setContentTitle("Smart Waste Management Application")
+                            .setContentText("Your Bin Is Almost 100% Full");
+
+            Intent notificationIntent = new Intent(c, MainActivity.class);
+            PendingIntent contentIntent = PendingIntent.getActivity(c, 0, notificationIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            builder.setContentIntent(contentIntent);
+
+            // Add as notification
+            NotificationManager manager = (NotificationManager) c.getSystemService(Context.NOTIFICATION_SERVICE);
+            manager.notify(0, builder.build());
+
+        }
+
     }
 
     // simple methods for register cell state changes
@@ -88,6 +149,7 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
     private static class ViewHolder {
         TextView number;
         TextView numberDesc;
+        TextView percDesc;
         TextView perc;
         ImageView img;
     }

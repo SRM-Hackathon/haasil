@@ -41,8 +41,11 @@ public class wasteFrag extends Fragment{
 
         final List<dustbinPOJO> dustbinPOJOList = new ArrayList<dustbinPOJO>(){
             {
-                add(new dustbinPOJO("123","65%"));
-                add(new dustbinPOJO("Dustbin 1","87%"));
+                add(new dustbinPOJO("Dustbin 0","65"));
+                add(new dustbinPOJO("Dustbin 1","87"));
+                add(new dustbinPOJO("Dustbin 2","35"));
+                add(new dustbinPOJO("Dustbin 3","46"));
+                add(new dustbinPOJO("Dustbin 4","57"));
             }
         };
 
