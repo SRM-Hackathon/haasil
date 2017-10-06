@@ -5,5 +5,6 @@ class Food(models.Model):
     stamp = models.DateTimeField(auto_now_add=True)
     humidity = models.FloatField()
     temperature = models.FloatField()
+    heat_index = models.FloatField()
     class Meta:
         ordering = ('stamp',)
