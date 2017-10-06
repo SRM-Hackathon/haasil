@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Haasil</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_waste">Waste</string>
+    <string name="title_food">Food</string>
+    <string name="title_elec">Electricity</string>
     <string name="title_activity_citizen_report">CitizenReport</string>
     <string name="title_activity_upload">upload</string>
 </resources>

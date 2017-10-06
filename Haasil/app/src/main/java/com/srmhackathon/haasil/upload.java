@@ -55,7 +55,7 @@ public class upload extends AppCompatActivity {
                 .setAspectRatio(1,1)
                 .start(this);
 
-        report = (ImageView)findViewById(R.id)
+//        report = (ImageView)findViewById(R.id)
 
 
     }
@@ -112,5 +112,5 @@ public class upload extends AppCompatActivity {
 
 
 
-}
+
 
