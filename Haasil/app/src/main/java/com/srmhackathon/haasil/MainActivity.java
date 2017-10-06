@@ -1,6 +1,7 @@
 package com.srmhackathon.haasil;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,10 +9,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String TAG = "RISABH";
-
+    ImageView prof;
 
  ViewPager viewPager;
     MenuItem prevMenuItem;
@@ -70,6 +78,27 @@ public class MainActivity extends AppCompatActivity {
                 // ...
             }
         };
+
+        prof = (ImageView)findViewById(R.id.img_header);
+
+        DatabaseReference userLocation= FirebaseDatabase.getInstance().getReference();
+        FirebaseUser current = FirebaseAuth.getInstance().getCurrentUser();
+        String curr = current.getUid();
+        DatabaseReference mDatabase=userLocation.child("Users").child(curr);
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                String uri = dataSnapshot.child("Image").getValue(String.class);
+                Picasso.with(MainActivity.this).load(uri).into(prof);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
 
  		viewPager = (ViewPager) findViewById(R.id.viewpager);
