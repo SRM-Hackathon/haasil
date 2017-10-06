@@ -46,60 +46,9 @@ public class CitizenReport extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setAspectRatio(1,1)
-                        .start(CitizenReport.this);
+                startActivity(new Intent(CitizenReport.this, upload.class));
+
             }
         });
 
-
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            if (resultCode == RESULT_OK) {
-
-                mprogressdialog = new ProgressDialog(CitizenReport.this);
-                mprogressdialog.setTitle("Uploading Image...");
-                mprogressdialog.setMessage("Please wait while we upload the image");
-                mprogressdialog.setCanceledOnTouchOutside(false);
-                mprogressdialog.show();
-
-                Uri resultUri = result.getUri();
-                String currentusers = current.getUid();
-                StorageReference filepath = mImagestorage.child("Picture Reports").child(currentusers + ".jpg");
-                filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        if(task.isSuccessful()){
-
-                            String download_uri = task.getResult().getDownloadUrl().toString();
-                            mDatabase.child("Image").setValue(download_uri).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(CitizenReport.this,"Uploading Successful",Toast.LENGTH_LONG).show();
-                                    mprogressdialog.dismiss();
-
-                                }
-                            });
-
-
-                        }   else {
-                            Toast.makeText(CitizenReport.this,"Uploading Failed",Toast.LENGTH_LONG).show();
-                            mprogressdialog.dismiss();
-                        }
-                    }
-                });
-
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
-            }
-        }
-    }
-
-
-}
