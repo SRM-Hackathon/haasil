@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "321900228246",
+    "firebase_url": "https://haasil-8e7a4.firebaseio.com",
+    "project_id": "haasil-8e7a4",
+    "storage_bucket": "haasil-8e7a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321900228246:android:88d685043c9a124e",
+        "android_client_info": {
+          "package_name": "com.srmhackathon.haasil"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321900228246-cf6p0iepv7n9kj2386mk5bq1k3ulm6o7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.srmhackathon.haasil",
+            "certificate_hash": "b8a003c8592de69a7dfaf4670aa8bbef766ca603"
+          }
+        },
+        {
+          "client_id": "321900228246-gr7oknhgbo5aaq8cr5nue0314drersh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCvrOoRj6je_feD4lf6CEkvh49VYjfcVo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321900228246-gr7oknhgbo5aaq8cr5nue0314drersh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
