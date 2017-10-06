@@ -79,26 +79,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        prof = (ImageView)findViewById(R.id.img_header);
-
-        DatabaseReference userLocation= FirebaseDatabase.getInstance().getReference();
-        FirebaseUser current = FirebaseAuth.getInstance().getCurrentUser();
-        String curr = current.getUid();
-        DatabaseReference mDatabase=userLocation.child("Users").child(curr);
-        mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                String uri = dataSnapshot.child("Image").getValue(String.class);
-                Picasso.with(MainActivity.this).load(uri).into(prof);
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
 
  		viewPager = (ViewPager) findViewById(R.id.viewpager);

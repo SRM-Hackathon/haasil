@@ -63,6 +63,7 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
             viewHolder = (ViewHolder) cell.getTag();
         }
 
+
         // bind data from selected element to view through view holder
         viewHolder.number.setText(item.getDustbinID());
         viewHolder.numberDesc.setText(item.getDustbinID());
@@ -70,7 +71,6 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
         viewHolder.percDesc.setText(item.getPercentage()+"%");
 
         update(Float.parseFloat(item.getPercentage()), viewHolder);
-
 
         return cell;
     }
@@ -82,15 +82,15 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
 
         else if (progressing >= 15 && progressing < 35) {
             viewHolder.img.setImageResource(R.drawable.transition);
-            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(600);
 
         } else if (progressing >= 35 && progressing < 65) {
             viewHolder.img.setImageResource(R.drawable.trasn);
-            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(600);
 
         } else if (progressing >= 65 && progressing < 85) {
             viewHolder.img.setImageResource(R.drawable.trasn1);
-            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(600);
             android.support.v4.app.NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(c)
                             .setSmallIcon(R.drawable.applogo)
@@ -108,7 +108,7 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
 
         } else if (progressing >= 85 && progressing <= 100) {
             viewHolder.img.setImageResource(R.drawable.trasn2);
-            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(2000);
+            ((TransitionDrawable) viewHolder.img.getDrawable()).startTransition(600);
             android.support.v4.app.NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(c)
                             .setSmallIcon(R.drawable.applogo)
