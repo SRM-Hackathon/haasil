@@ -27,6 +27,7 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support:design:26.+'
+    compile 'com.ramotion.foldingcell:folding-cell:1.2.1'
     compile 'com.android.support:support-vector-drawable:26.+'
     compile 'com.google.firebase:firebase-auth:10.0.1'
     testCompile 'junit:junit:4.12'
