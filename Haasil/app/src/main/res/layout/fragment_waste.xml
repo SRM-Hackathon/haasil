@@ -2,17 +2,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
     tools:context="com.srmhackathon.haasil.wasteFrag">
 
     <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/folding_cell"
-        android:padding="5dp"
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="10dp">
         ​
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/cell_content_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -20,21 +25,55 @@
             android:visibility="gone">
 
             <TextView
+                android:id="@+id/numberDesc"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
-        </FrameLayout>
+                android:layout_height="160dp"
+                android:paddingLeft="3dp"
+                android:paddingStart="3dp"
+                android:text="Dustbin number"
+                android:textSize="26sp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_below="@id/numberDesc"
+                android:src="@drawable/flash"
+
+                />
+
+        </RelativeLayout>
         ​
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/cell_title_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/holo_blue_dark">
 
             <TextView
+                android:id="@+id/number"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@android:color/holo_blue_dark" />
-        </FrameLayout>
+                android:layout_height="80dp"
+                android:paddingLeft="3dp"
+                android:paddingStart="3dp"
+                android:text="Dustbin number"
+                android:textSize="26sp" />
+
+            <TextView
+                android:id="@+id/percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:paddingRight="3dp"
+                android:paddingTop="6dp"
+                android:text="64%"
+                android:textSize="40sp"
+
+                />
+
+
+        </RelativeLayout>
         ​
     </com.ramotion.foldingcell.FoldingCell>
 </LinearLayout>
