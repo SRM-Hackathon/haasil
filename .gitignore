@@ -9,3 +9,6 @@ local.properties
 .externalNativeBuild
 .idea/
 gradle.properties
+/predictor/HT_Sensor_dataset.dat
+/predictor/HT_Sensor_metadata.dat
+
