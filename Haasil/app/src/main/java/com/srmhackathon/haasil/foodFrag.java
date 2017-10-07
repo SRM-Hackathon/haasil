@@ -25,13 +25,16 @@ import static android.content.ContentValues.TAG;
 
 public class foodFrag extends Fragment {
 
-    TextView temp,humidity,heatindex;
-    ToggleButton light,pump;
-    FirebaseDatabase database;
-    DatabaseReference myRef;
+    TextView temp, humidity, heatindex;
+    ToggleButton light, pump;
+
     public foodFrag() {
 
     }
+
+    DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference db1 = db.child("temperature");
+    DatabaseReference db2 = db.child("heat_index");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,22 +42,37 @@ public class foodFrag extends Fragment {
         View v = inflater.inflate(R.layout.fragment_food, container, false);
 
 
-        database = FirebaseDatabase.getInstance();
-        myRef = database.getReference();
+        temp = (TextView) v.findViewById(R.id.tx_temp);
+        humidity = (TextView) v.findViewById(R.id.tx_hum);
+        heatindex = (TextView) v.findViewById(R.id.tx_hi);
+        light = (ToggleButton) v.findViewById(R.id.tb_lights);
+        pump = (ToggleButton) v.findViewById(R.id.toggleButton2);
 
-        temp = (TextView)v.findViewById(R.id.tx_temp);
-        humidity = (TextView)v.findViewById(R.id.tx_hum);
-        heatindex = (TextView)v.findViewById(R.id.tx_hi);
-        light = (ToggleButton)v.findViewById(R.id.tb_lights);
-        pump = (ToggleButton)v.findViewById(R.id.toggleButton2);
+        db.child("humidity").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String value = dataSnapshot.getValue().toString();
+                    humidity.setText(value+"%");
+                }
+            }
 
-        myRef.child("temperature").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        db1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                temp.setText(value + " Celcius");
+                if (dataSnapshot.exists()) {
+                    String value = dataSnapshot.getValue().toString();
+                    temp.setText(value + " Celcius");
+                }
+
             }
 
             @Override
@@ -64,55 +82,48 @@ public class foodFrag extends Fragment {
             }
         });
 
-        myRef.child("humidity").addValueEventListener(new ValueEventListener() {
+        db2.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                temp.setText(value + " %");
+
+                if (dataSnapshot.exists()) {
+                    String value = dataSnapshot.getValue().toString();
+                    heatindex.setText(value + " Celcius");
+                }
+
+
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        myRef.child("heat_index").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                String value = dataSnapshot.getValue(String.class);
-                temp.setText(value + " Celcius");
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                Log.w(TAG, "Failed to read value", error.toException());
             }
         });
 
 
         light.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
                 if (isChecked) {
-                    myRef.child("Lights").setValue("1");
+                    db.child("Lights").setValue(0);
                 } else {
-                    myRef.child("Lights").setValue("0");
+                    db.child("Lights").setValue(1);
                 }
             }
         });
 
         pump.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                DatabaseReference db = FirebaseDatabase.getInstance().getReference();
+
                 if (isChecked) {
-                    myRef.child("Pump").setValue("1");
+                    db.child("Pump").setValue(0);
                 } else {
-                    myRef.child("Pump").setValue("0");
+                    db.child("Pump").setValue(1);
                 }
             }
         });
