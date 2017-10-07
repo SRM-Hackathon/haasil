@@ -2,114 +2,186 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-
     android:background="@drawable/background"
+
+    android:orientation="vertical"
     tools:context="com.srmhackathon.haasil.foodFrag">
 
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="53dp"
-        android:layout_marginStart="53dp"
-        android:layout_marginTop="112dp"
-        android:text="Temperature"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+    <android.support.v7.widget.CardView
+        android:id="@+id/firstCard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="112dp">
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="46dp"
-        android:text="Humidity"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:text="Heat Index"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/textView2"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/tx_temp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_marginLeft="60dp"
-        android:layout_marginStart="60dp"
-        android:layout_toEndOf="@+id/textView"
-        android:layout_toRightOf="@+id/textView"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:text="Temperature"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tx_hum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView3"
-        android:layout_alignLeft="@+id/tx_temp"
-        android:layout_alignStart="@+id/tx_temp"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+            <TextView
+                android:id="@+id/tx_temp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView"
+                android:layout_marginLeft="60dp"
+                android:layout_marginStart="60dp"
+                android:layout_toEndOf="@+id/textView"
+                android:layout_toRightOf="@+id/textView"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/tx_hi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tx_hum"
-        android:layout_alignStart="@+id/tx_hum"
-        android:layout_alignTop="@+id/textView3"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:textStyle="bold" />
+        </RelativeLayout>
 
-    <ToggleButton
-        android:id="@+id/tb_lights"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="113dp"
-        android:text="ToggleButton"
-        android:textAllCaps="false"
-        android:textOff="Lights Off"
-        android:textOn="Lights On"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView2"
-        android:layout_alignEnd="@+id/textView2" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton2"
-        android:layout_width="wrap_content"
+    </android.support.v7.widget.CardView>
+
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/secondCard"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/firstCard"
+        android:layout_alignStart="@+id/firstCard"
+        android:layout_below="@+id/firstCard"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Humidity"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tx_hum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginLeft="60dp"
+                android:layout_marginStart="60dp"
+
+                android:layout_toRightOf="@id/textView2"
+                android:layout_toEndOf="@id/textView2"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <!--android:layout_above="@+id/textView3"-->
+    <!--android:layout_alignLeft="@+id/tx_temp"-->
+    <!--android:layout_alignStart="@+id/tx_temp"-->
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/third"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignLeft="@+id/firstCard"
+        android:layout_alignStart="@+id/firstCard"
+        android:layout_below="@+id/secondCard"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heat Index"
+
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/tx_hi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginLeft="60dp"
+                android:layout_marginStart="60dp"
+
+                android:layout_toRightOf="@id/textView3"
+                android:layout_toEndOf="@id/textView3"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ToggleButton"
-        android:textAllCaps="false"
-        android:textOff="Pump Off"
-        android:textOn="Pump On"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_alignBaseline="@+id/tb_lights"
-        android:layout_alignBottom="@+id/tb_lights"
-        android:layout_alignLeft="@+id/tx_hi"
-        android:layout_alignStart="@+id/tx_hi" />
+        android:orientation="horizontal"
+        android:layout_below="@id/third"
+        >
+
+        <ToggleButton
+            android:id="@+id/tb_lights"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/textView2"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/textView2"
+            android:layout_marginBottom="113dp"
+            android:text="ToggleButton"
+            android:textAllCaps="false"
+            android:textOff="Lights Off"
+            android:textOn="Lights On"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ToggleButton
+            android:id="@+id/toggleButton2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tb_lights"
+            android:layout_alignBottom="@+id/tb_lights"
+            android:layout_alignLeft="@+id/tx_hi"
+            android:layout_alignStart="@+id/tx_hi"
+            android:text="ToggleButton"
+            android:textAllCaps="false"
+            android:textOff="Pump Off"
+            android:textOn="Pump On"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
 </RelativeLayout>
