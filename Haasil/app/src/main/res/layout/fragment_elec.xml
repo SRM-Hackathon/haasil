@@ -12,4 +12,10 @@
         android:layout_height="wrap_content"
         android:text="ELEC"
         />
+
+    <Button
+        android:id="@+id/bu_int_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="clickforpaymentactivity" />
 </LinearLayout>
