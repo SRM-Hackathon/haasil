@@ -94,7 +94,7 @@ public class dustbinAdapter extends ArrayAdapter<dustbinPOJO> {
             android.support.v4.app.NotificationCompat.Builder builder =
                     new NotificationCompat.Builder(c)
                             .setSmallIcon(R.drawable.applogo)
-                            .setContentTitle("Smart Waste Management Application")
+                            .setContentTitle("Haasil")
                             .setContentText("Your Bin Is Almost 75% Full");
 
             Intent notificationIntent = new Intent(c, MainActivity.class);

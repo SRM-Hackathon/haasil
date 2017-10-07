@@ -109,9 +109,9 @@ public class foodFrag extends Fragment {
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
                 if (isChecked) {
-                    db.child("Lights").setValue(0);
-                } else {
                     db.child("Lights").setValue(1);
+                } else {
+                    db.child("Lights").setValue(0);
                 }
             }
         });
@@ -121,9 +121,9 @@ public class foodFrag extends Fragment {
                 DatabaseReference db = FirebaseDatabase.getInstance().getReference();
 
                 if (isChecked) {
-                    db.child("Pump").setValue(0);
-                } else {
                     db.child("Pump").setValue(1);
+                } else {
+                    db.child("Pump").setValue(0);
                 }
             }
         });
