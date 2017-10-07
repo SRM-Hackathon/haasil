@@ -6,18 +6,6 @@
     android:layout_height="match_parent">
 
 
-    <com.github.florent37.materialviewpager.MaterialViewPager
-        android:id="@+id/materialViewPager"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        app:viewpager_logo="@layout/header_logo"
-        app:viewpager_logoMarginTop="100dp"
-        app:viewpager_color="@color/colorPrimary"
-        app:viewpager_headerHeight="200dp"
-        app:viewpager_hideLogoWithFade="true"
-        app:viewpager_animatedHeaderImage="true"
-        app:viewpager_disableToolbar="true"
-        />
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"

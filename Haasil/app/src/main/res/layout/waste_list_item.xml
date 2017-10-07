@@ -2,40 +2,47 @@
 <com.ramotion.foldingcell.FoldingCell xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:folding-cell="http://schemas.android.com/apk/res-auto"
     android:id="@+id/folding_cell"
-
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clipChildren="false"
-    android:clipToPadding="false"
-
-    folding-cell:backSideColor="#f9e161"
-    android:padding="10dp">
+    android:padding="10dp"
+    folding-cell:additionalFlipsCount="2"
+    folding-cell:animationDuration="300"
+    folding-cell:backSideColor="@color/bgBackSideColor"
+    folding-cell:cameraHeight="30">
     ​
 
     <RelativeLayout
         android:id="@+id/cell_content_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_green_dark"
+        android:background="@color/bgContentTop"
         android:visibility="gone">
+
 
         <TextView
             android:id="@+id/numberDesc"
             android:layout_width="match_parent"
-            android:layout_height="160dp"
+            android:layout_height="44dp"
             android:paddingLeft="3dp"
             android:paddingStart="3dp"
             android:text="Dustbin number"
-            android:textSize="26sp" />
+            android:textAlignment="center"
+            android:textSize="40sp" />
 
         <ImageView
             android:id="@+id/img"
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
             android:layout_below="@id/numberDesc"
-            android:src="@drawable/flash"
+            android:src="@drawable/flash" />
 
-            />
+        <TextView
+            android:id="@+id/percenDesc"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_below="@id/img"
+            android:textAlignment="center"
+            android:textSize="30sp" />
 
     </RelativeLayout>
     ​
@@ -44,12 +51,13 @@
         android:id="@+id/cell_title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/holo_blue_dark">
+        android:background="@color/bgContent">
 
         <TextView
             android:id="@+id/number"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
             android:paddingLeft="3dp"
             android:paddingStart="3dp"
             android:text="Dustbin number"
@@ -59,8 +67,11 @@
             android:id="@+id/percent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/number"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+
+            android:layout_marginTop="20dp"
             android:paddingRight="3dp"
             android:paddingTop="6dp"
             android:text="64%"
